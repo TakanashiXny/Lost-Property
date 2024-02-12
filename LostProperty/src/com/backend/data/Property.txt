@@ -1,0 +1,6 @@
+item,category,time,location,contact,description
+123,456,789,10,11,12
+credit card,,,,,
+school card,school,123,classroom,123456789,It's good
+school card,,,,,
+Found,credit card,111,111,111,1111,111
