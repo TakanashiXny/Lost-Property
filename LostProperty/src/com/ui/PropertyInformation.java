@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -120,9 +121,19 @@ public class PropertyInformation {
                 String contact = contactField.getText().trim();
                 String desctiption = descriptionField.getText().trim();
 
-                String content = "Lost" + type + "," + itemName + "," + time + "," + location + "," + contact + "," + desctiption;
-                //TODO
-                // Write into the file
+                String content = "Lost,\t" + type + ",\t" + itemName + ",\t" + time + ",\t" + location + ",\t" + contact + ",\t" + desctiption + "\n";
+                // TODO
+                // Write into the File
+                String filepath = "LostProperty/src/com/backend/data/Property.txt";
+                try{
+                    FileWriter fileWriter = new FileWriter(path, true);
+                    fileWriter.write(content);
+                    fileWriter.close();
+                }
+                catch (Exception ex){
+                    ex.printStackTrace();
+                }
+
                 try {
                     BufferedWriter writer = new BufferedWriter(new FileWriter(path, true));
                     writer.write(content);
@@ -147,9 +158,18 @@ public class PropertyInformation {
                 String contact = contactField.getText().trim();
                 String desctiption = descriptionField.getText().trim();
 
-                String content = "Found" + "," + type + "," + itemName + "," + time + "," + location + "," + contact + "," + desctiption;
-                //TODO
+                String content = "Found,\t" + type + ",\t" + itemName + ",\t" + time + ",\t" + location + ",\t" + contact + ",\t" + desctiption + "\n";
+                // TODO
                 // Write into the file
+                String filepath = "LostProperty/src/com/backend/data/Property.txt";
+                try{
+                    FileWriter fileWriter = new FileWriter(path, true);
+                    fileWriter.write(content);
+                    fileWriter.close();
+                }
+                catch (Exception ex){
+                    ex.printStackTrace();
+                }
                 try {
                     BufferedWriter writer = new BufferedWriter(new FileWriter(path, true));
                     writer.write(content);

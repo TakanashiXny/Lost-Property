@@ -3,7 +3,12 @@ package com.ui;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.*;
+import java.io.File;
+import java.util.Scanner;
+import java.io.FileWriter;
 
 public class RegisterGUI extends JFrame implements ActionListener {
     private JLabel label1, label2, label3;
@@ -69,15 +74,56 @@ public class RegisterGUI extends JFrame implements ActionListener {
             String username = textField1.getText();
             String password = new String(passwordField1.getPassword());
             String confirmPassword = new String(passwordField2.getPassword());
-            // 进行一些验证和处理，如检查是否为空，是否合法，是否匹配等
-            // 这里省略了具体的实现，您可以根据您的需求进行修改
-            // 如果注册信息合法，就将其保存到数据库中，并提示用户注册成功
-            // 如果注册信息不合法，就提示用户注册失败，并显示错误信息
-        }
-        else if (source == button2) {
+            // 检查输入是否为空
+            if (username.isEmpty()) {
+                System.out.println("Username cannot be empty!");
+            }
+            if (password.isEmpty()) {
+                System.out.println("Password cannot be empty!");
+            }
+            if (confirmPassword.isEmpty()) {
+                System.out.println("Password confirm cannot be empty!");
+            }
+            // 检验是否已存在相同用户名
+            File file = new File("LostProperty/src/com/backend/data/user.txt");
+            boolean usernameExists = false; // 标志变量，用于记录是否已存在相同用户名
+            try (Scanner scanner = new Scanner(file)) {
+                while (scanner.hasNextLine()) {
+                    String line = scanner.nextLine();
+                    String[] parts = line.split(",");
+                    if (username.equals(parts[0])) {
+                        System.out.println("Username exists!");
+                        JOptionPane.showMessageDialog(this, "Username Exist!!.");
+                        usernameExists = true; // 将标志变量设置为 true
+                        break; // 终止循环
+                    }
+                }
+            }
+            catch (FileNotFoundException ex) {
+                throw new RuntimeException(ex);
+            }
+            // 如果用户名已存在，则不进行后续操作
+            if (usernameExists) {
+                return;
+            }
+            if (!password.equals(confirmPassword)) {
+                JOptionPane.showMessageDialog(this, "Password doesn't match");
+                return;
+            }
+            //录入用户信息
+            try (FileWriter writer = new FileWriter("LostProperty/src/com/backend/data/user.txt", true)) {
+                // 将用户名和密码以逗号分隔的形式写入文件
+                writer.write(username + "," + password + "\n");
+                System.out.println("Successfully registered！");
+            }
+            catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+            if (source == button2) {
             this.dispose();
             new LoginGUI();
+            }
         }
-    }
 
+    }
 }

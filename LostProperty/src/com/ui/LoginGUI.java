@@ -3,7 +3,12 @@ package com.ui;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.List;
 
 public class LoginGUI extends JFrame implements ActionListener {
     private JLabel label1, label2, label3;
@@ -64,10 +69,49 @@ public class LoginGUI extends JFrame implements ActionListener {
             // 获取用户输入的用户名和密码
             String username = textField1.getText();
             String password = new String(passwordField1.getPassword());
-            // 进行一些验证和处理，如查询数据库，判断是否匹配等
-            // 这里省略了具体的实现，您可以根据您的需求进行修改
-            // 如果登录成功，就提示用户，并跳转到主页面
-            // 如果登录失败，就提示用户，并显示错误信息
+            // 检查输入是否为空
+            if (username.isEmpty()) {
+                System.out.println("Username cannot be empty!");
+            }
+            if (password.isEmpty()) {
+                System.out.println("Password cannot be empty!");
+            }
+            // 生成usernamelist和passwordlist
+            File file = new File("LostProperty/src/com/backend/data/user.txt");
+            List<String> usernamelist = new ArrayList<>();
+            List<String> passwordlist = new ArrayList<>();
+            try (Scanner scanner = new Scanner(file)) {
+                while (scanner.hasNextLine()) {
+                    String line = scanner.nextLine();
+                    String[] parts = line.split(",");
+                    usernamelist.add(parts[0]);
+                    passwordlist.add(parts[1]);
+                }
+            }
+            catch (FileNotFoundException ex) {
+                throw new RuntimeException(ex);
+            }
+            // 检验用户名是否存在
+            if (!usernamelist.contains(username)) {
+                System.out.println("Username doesn't exist!");
+                JOptionPane.showMessageDialog(this, "Username doesn't exist!");
+            }
+            // 检验username和password是否匹配
+            boolean passwordCorrect = false;
+            for (int i = 0; i < usernamelist.size(); i++) {
+                if (username.equals(usernamelist.get(i)) && password.equals(passwordlist.get(i))) {
+                    passwordCorrect = true;
+                    break;
+                }
+            }
+            //feedback
+            if (passwordCorrect) {
+                System.out.println("Welcome back!");
+            } else {
+                System.out.println("Password incorrect!");
+                JOptionPane.showMessageDialog(this, "Please check your username or password");
+            }
+
             this.dispose();
             new HomePageGUI();
         }
