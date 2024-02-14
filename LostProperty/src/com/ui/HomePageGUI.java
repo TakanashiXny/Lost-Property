@@ -48,24 +48,26 @@ public class HomePageGUI extends JFrame implements ActionListener {
         models = new ArrayList<>();
 
         DefaultListModel<String> model1 = new DefaultListModel<>();
-        model1.addElement("Item name: Airpots");
-        model1.addElement("Found place: Bowling Center, B1, Texas Union");
-        model1.addElement("Description: Yellow Shell, Carved with JK");
-        model1.addElement("Post Time: Jan 16, 2024");
+        model1.addElement("Item name: credit");
+        model1.addElement("Found place: Classroom");
+        model1.addElement("Description: It's good");
+        model1.addElement("Post Time: 2024-2-1");
+        model1.addElement("------------------------------------------------------------------------------------------------------------");
         models.add(model1);
 
         DefaultListModel<String> model2 = new DefaultListModel<>();
-        model2.addElement("Item name: Wallet");
-        model2.addElement("Found place: Dr. Mike’s Office, 3F , Partain Hall");
-        model2.addElement("Description: Brown Leather , With a Student ID");
-        model2.addElement("Post Time : Dec 28 ,2023");
+        model2.addElement("Item name: cups");
+        model2.addElement("Found place: Playground");
+        model2.addElement("Description: It's not good");
+        model2.addElement("Post Time : 2024-2-2");
+        model2.addElement("------------------------------------------------------------------------------------------------------------");
         models.add(model2);
 
         DefaultListModel<String> model3 = new DefaultListModel<>();
-        model3.addElement("Item name : Bottle");
-        model3.addElement("Found place : Red Rocks Trail");
-        model3.addElement("Description : Plastic");
-        model3.addElement("Post Time : Dec 28 ,2023");
+        model3.addElement("Item name : airpods");
+        model3.addElement("Found place : Gym");
+        model3.addElement("Description : It will be mine");
+        model3.addElement("Post Time : 2024-2-3");
         models.add(model3);
 
         panel1 = new JPanel();
@@ -74,7 +76,7 @@ public class HomePageGUI extends JFrame implements ActionListener {
         panel4 = new JPanel();
         scrollPane1 = new JScrollPane(panel1);
         scrollPane2 = new JScrollPane(textField1);
-        comboBox1 = new JComboBox<>(new String[] {"Home", "Category", "Report", "Account"});
+        comboBox1 = new JComboBox<>(new String[] {"Home", "Report"});
 
         comboBox1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

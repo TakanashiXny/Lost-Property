@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.sql.*;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.List;
@@ -66,17 +66,17 @@ public class LoginGUI extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
         if (source == button1) {
-            // 获取用户输入的用户名和密码
+
             String username = textField1.getText();
             String password = new String(passwordField1.getPassword());
-            // 检查输入是否为空
+
             if (username.isEmpty()) {
                 System.out.println("Username cannot be empty!");
             }
             if (password.isEmpty()) {
                 System.out.println("Password cannot be empty!");
             }
-            // 生成usernamelist和passwordlist
+
             File file = new File("LostProperty/src/com/backend/data/user.txt");
             List<String> usernamelist = new ArrayList<>();
             List<String> passwordlist = new ArrayList<>();
@@ -91,12 +91,12 @@ public class LoginGUI extends JFrame implements ActionListener {
             catch (FileNotFoundException ex) {
                 throw new RuntimeException(ex);
             }
-            // 检验用户名是否存在
+
             if (!usernamelist.contains(username)) {
                 System.out.println("Username doesn't exist!");
                 JOptionPane.showMessageDialog(this, "Username doesn't exist!");
             }
-            // 检验username和password是否匹配
+
             boolean passwordCorrect = false;
             for (int i = 0; i < usernamelist.size(); i++) {
                 if (username.equals(usernamelist.get(i)) && password.equals(passwordlist.get(i))) {
@@ -104,7 +104,7 @@ public class LoginGUI extends JFrame implements ActionListener {
                     break;
                 }
             }
-            //feedback
+
             if (passwordCorrect) {
                 System.out.println("Welcome back!");
             } else {

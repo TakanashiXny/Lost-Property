@@ -121,7 +121,7 @@ public class PropertyInformation {
                 String contact = contactField.getText().trim();
                 String desctiption = descriptionField.getText().trim();
 
-                String content = "Lost,\t" + type + ",\t" + itemName + ",\t" + time + ",\t" + location + ",\t" + contact + ",\t" + desctiption + "\n";
+                String content = "Lost," + type + "," + itemName + "," + time + "," + location + "," + contact + "," + desctiption + "\n";
                 // TODO
                 // Write into the File
                 String filepath = "LostProperty/src/com/backend/data/Property.txt";
